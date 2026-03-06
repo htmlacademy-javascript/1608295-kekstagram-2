@@ -18,22 +18,22 @@ const NAMES = [
   'Ольга'
 ];
 
-const likes = {
+const Likes = {
   MIN: 15,
   MAX: 200,
 };
 
-const avatars = {
+const Avatars = {
   MIN: 1,
   MAX: 6,
 };
 
-const comments = {
+const Comments = {
   MIN: 1,
   MAX: 30,
 };
 
-const posts = 25;
+const POST_COUNT = 25;
 
 let commentIdCounter = 1;
 
@@ -44,21 +44,23 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
+const getRandomElement = (items) => items[getRandomInteger(0, items.length - 1)];
+
 const createComment = () => ({
   id: commentIdCounter++,
-  avatar: `img/avatar-${getRandomInteger(avatars.MIN, avatars.MAX)}.svg`,
-  message: MESSAGES[getRandomInteger(0, MESSAGES.length - 1)],
-  name: NAMES[getRandomInteger(0, NAMES.length - 1)],
+  avatar: `img/avatar-${getRandomInteger(Avatars.MIN, Avatars.MAX)}.svg`,
+  message: getRandomElement(MESSAGES),
+  name: getRandomElement(NAMES),
 });
 
 const createPhoto = (id) => ({
   id: id,
   url: `photos/${id}.jpg`,
   description: `Фото №${id}`,
-  likes: getRandomInteger(likes.MIN, likes.MAX),
-  comments: Array.from({ length: getRandomInteger(comments.MIN, comments.MAX) }, createComment),
+  likes: getRandomInteger(Likes.MIN, Likes.MAX),
+  comments: Array.from({ length: getRandomInteger(Comments.MIN, Comments.MAX) }, createComment),
 });
 
-const createPhotos = () => Array.from({ length: posts }, (_, index) => createPhoto(index + 1));
+const createPhotos = () => Array.from({ length: POST_COUNT }, (_, index) => createPhoto(index + 1));
 
 createPhotos();
