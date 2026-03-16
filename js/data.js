@@ -1,5 +1,4 @@
-import { getRandomElement } from './until.js';
-import { getRandomInteger } from './until.js';
+import { getRandomElement, getRandomInteger } from './utils.js';
 
 const MESSAGES = [
   'Всё отлично!',
@@ -57,4 +56,4 @@ const createPhoto = (id) => ({
 
 const createPhotos = () => Array.from({ length: POST_COUNT }, (_, index) => createPhoto(index + 1));
 
-createPhotos();
+export {createPhotos};
